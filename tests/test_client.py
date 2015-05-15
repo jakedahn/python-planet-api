@@ -4,6 +4,7 @@ import unittest
 
 from mock import patch
 from planet_api import base
+from planet_api import clients
 
 
 class TestClient(unittest.TestCase):
@@ -33,11 +34,11 @@ class TestClient(unittest.TestCase):
             client.authenticate()
 
     def test_client_authenticate(self):
-        client_with_key = base.ApiV0Client(base_url=self.test_base_url,
-                                           api_key=self.test_api_key)
-        client_with_account = base.ApiV0Client(base_url=self.test_base_url,
-                                               email=self.test_email,
-                                               password=self.test_password)
+        client_with_key = clients.ApiV0Client(base_url=self.test_base_url,
+                                              api_key=self.test_api_key)
+        client_with_account = clients.ApiV0Client(base_url=self.test_base_url,
+                                                  email=self.test_email,
+                                                  password=self.test_password)
 
         client_with_key.authenticate()
         self.assertEqual(self.test_api_key, client_with_key.token)
