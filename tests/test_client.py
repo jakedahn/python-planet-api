@@ -1,8 +1,8 @@
+import fixtures  # sample responses, etc
 import unittest
-import mock
+
 
 from mock import patch
-
 from planet_api import base
 
 
@@ -32,7 +32,7 @@ class TestClient(unittest.TestCase):
         with self.assertRaises(base.NotImplementedError):
             client.authenticate()
 
-    def test_v0_client(self):
+    def test_client_authenticate(self):
         client_with_key = base.ApiV0Client(base_url=self.test_base_url,
                                            api_key=self.test_api_key)
         client_with_account = base.ApiV0Client(base_url=self.test_base_url,

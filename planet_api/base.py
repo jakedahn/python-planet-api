@@ -32,3 +32,4 @@ class ApiV0Client(BaseClient):
 
         res = requests.post(req_url, data=payload)
         self.token = res['token']
+
