@@ -1,2 +1,5 @@
 .local_env
 scratch.py
+
+*egg-info
+.venv
