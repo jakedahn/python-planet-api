@@ -8,12 +8,16 @@ This is presently a work in progress, please do not use it unless you know what 
 
 ## How to use it
 
-Below is an example of what the interface might look like:
+The python stuff below is meant to be an illustration of what the client interface will look like. It does not presently represent what the client is capable of doing:
 
 ```python
 
-from planet_api.client import ApiV0Client as client
+from planet_api.client import ApiV0Client
 
+client = ApiV0Client(username='foo', password='bar')  # this can also use api_key, or token
+client.authenticate() # this will take the provided credentials, and use them to acquire an access token
+
+# Scenes Resource
 client.scenes.get('20150306_022415_0908')
 client.scenes.list(count=100, cloud_cover_lte=0)  # 100 cloud-free scenes
 # |
@@ -22,6 +26,35 @@ client.scenes.list(count=100, cloud_cover_lte=0)  # 100 cloud-free scenes
 print Scene.camera_bit_depth  # 12
 print Scene.cloud_cover  # 0
 print Scene.analytic_download_url  # downloads https://api.planet.com/v0/scenes/ortho/20150306_022415_0908/full?product=analytic
+# not sure yet what methods will be useful for the Scene object
+
+# Workspaces Resource
+
+workspaces = client.workspaces.list()
+# |
+# --> [<Workspace rad>, <Workspace murica>, ...]
+rad_workspace = workspaces[0]
+rad_workspace.name = 'superrad'
+rad_workspace.save() # this will call the HTTP API and save with the updated attributes
+
+murica_workspace = workspaces[1]
+new_thing = murica_workspace.clone('newthing')
+# |
+# --> <Workspace newthing>
+
+# Mosaics Resource
+
+mosaic = client.mosaics.get('mosaic_name')
+quads = mosaic.quads()
+# |
+# --> [<Quad L15-1593E-1301N>, <Quad L15-1378E-1310N>, ...]
+
+quads[0].scenes()
+# |
+# --> [<Scene 20150306_022415_0908>, <Scene 20150306_022415_0131>, ...]
+
+
+
 ```
 
 ## Project Principles
