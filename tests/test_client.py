@@ -19,10 +19,10 @@ class TestClient(unittest.TestCase):
         pass
 
     def test_base_client(self):
-        client = base.BaseClient(base_url=self.test_base_url,
-                                 api_key=self.test_api_key,
-                                 email=self.test_email,
-                                 password=self.test_password)
+        client = clients.BaseClient(base_url=self.test_base_url,
+                                    api_key=self.test_api_key,
+                                    email=self.test_email,
+                                    password=self.test_password)
 
         self.assertEqual(None, client.token)
         self.assertEqual(self.test_base_url, client.base_url)

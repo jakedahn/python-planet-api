@@ -2,7 +2,22 @@ import base
 import requests
 
 
-class ApiV0Client(base.BaseClient):
+class BaseClient(object):
+
+    def __init__(self, base_url='https://api.planet.com', api_key=None,
+                 email=None, password=None):
+        self.base_url = base_url
+        self._api_key = api_key
+        self._email = email
+        self._password = password
+
+        self.token = None
+
+    def authenticate(self):
+        raise base.NotImplementedError()
+
+
+class ApiV0Client(BaseClient):
 
     def authenticate(self):
         if self._api_key:

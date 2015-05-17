@@ -12,7 +12,7 @@ The python stuff below is meant to be an illustration of what the client interfa
 
 ```python
 
-from planet_api.client import ApiV0Client
+from planet_api.clients import ApiV0Client
 
 client = ApiV0Client(username='foo', password='bar')  # this can also use api_key, or token
 client.authenticate() # this will take the provided credentials, and use them to acquire an access token
