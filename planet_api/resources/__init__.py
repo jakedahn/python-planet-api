@@ -1,0 +1,3 @@
+
+class BaseResource(object):
+    pass
