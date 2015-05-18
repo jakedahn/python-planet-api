@@ -1,4 +1,7 @@
-import base
+from planet_api import base
+from planet_api import resources
+from planet_api.resources import scenes
+
 import requests
 
 
@@ -12,12 +15,22 @@ class BaseClient(object):
         self._password = password
 
         self.token = None
+        self.auth_headers = {
+            'Authorization': 'api-key ' + self.token,
+        }
 
     def authenticate(self):
         raise base.NotImplementedError()
 
 
 class ApiV0Client(BaseClient):
+    scenes = None
+    # mosaics = None
+    # workspaces = None
+
+    def __init__(self, *args, **kwargs):
+        super(ApiV0Client, self).__init__(*args, **kwargs)
+        self.scenes = scenes.ScenesResource(client=self)
 
     def authenticate(self):
         if self._api_key:

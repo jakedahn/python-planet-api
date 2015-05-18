@@ -5,6 +5,7 @@ import unittest
 from mock import patch
 from planet_api import base
 from planet_api import clients
+from planet_api import resources
 
 
 class TestClient(unittest.TestCase):
@@ -53,3 +54,9 @@ class TestClient(unittest.TestCase):
                 data=dict(email=self.test_email, password=self.test_password))
 
         self.assertEqual('fancytoken', client_with_account.token)
+
+    # def test_mount_resources(self):
+    #     client = clients.ApiV0Client(base_url=self.test_base_url,
+    #                                  api_key=self.test_api_key)
+    #     self.assertEqual(resources.scenes, client.scenes)
+
